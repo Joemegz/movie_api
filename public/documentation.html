@@ -7,6 +7,151 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <center><h2>Documentation</h2></center>
+    <hr width="100%">
+    <center>
+   <table cellspacing="7" cellpadding="7" border="1" width="750">
+   <tr style="background: lavender;">
+    <th>
+        Endpoint
+    </th>
+    <th>
+        Method Type
+    </th>
+    <th>
+        Description
+    </th>
+    <th>
+        Query Parameters
+    </th>
+    <th>
+        Expected Request
+    </th>
+    <th>
+        Expected Response
+    </th>
+   </tr>
+   
+   <tr>
+    <td>/users</td>
+    <td>POST</td>
+    <td>Create user registration</td>
+    <td>None</td>
+    <td>
+        {
+            <br>
+            "name": "Kevin",
+            <br>
+            "id" : 2
+            <br>
+        }
+    </td>
+   </tr>
+
+   <tr>
+    <td>/movies</td>
+    <td>GET</td>
+    <td>fetch list of movies</td>
+    <td>None</td>
+    <td>
+       None
+    </td>
+    <td>
+        {
+            "Title": "The Guardian",
+            "Description": "A high school swim champion with a troubled past enrolls in the U.S. Coast Guard's 'A' School, where legendary rescue swimmer Ben Randall teaches him some hard lessons about loss, love, and self-sacrifice.",
+            "Genre": {
+                "Name": "Action",
+                "Description": "Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats."
+            },
+            "Director": {
+                "Name": "Andrew Davis",
+                "Bio": "Andrew Davis is a filmmaker with a reputation for directing intelligent thrillers, most notably the Academy Award-nominated box-office hit The Fugitive (1993), starring Harrison Ford and Tommy Lee Jones. The film received seven Academy Award nominations including Best Picture and earned Jones a Best Supporting Actor award. Davis garnered a Golden Globe nomination for Best Director and a Directors Guild of America nomination for Outstanding Directorial Achievement in Theatrical Direction."
+            },
+            "ImageURL": "https://www.imdb.com/title/tt0406816/mediaviewer/rm58757632/?ref_=tt_ov_i",
+            "Year": "2006"
+        },
+        ...
+    </td>
+   </tr>
+
+   <tr>
+    <td>/movies/genre/genreName</td>
+    <td>GET</td>
+    <td>Fetch genre name</td>
+    <td>None</td>
+    <td>None</td>
+    <td>
+        {
+            "Name": "Action",
+            "Description": "Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats."
+        }
+    </td>
+   </tr>
+   <tr>
+   <td>/movies/directors/directorName</td>
+    <td>GET</td>
+    <td>Fetch Director name</td>
+    <td>None</td>
+    <td>None</td>
+    <td>
+        {
+            "Name": "Adam McKay",
+            "Bio": "Adam McKay (born April 17, 1968) is an American screenwriter, director, comedian, and actor. McKay has a comedy partnership with Will Ferrell, with whom he co-wrote the films Anchorman, Talladega Nights, and The Other Guys. Ferrell and McKay also founded their comedy website Funny or Die through their production company Gary Sanchez Productions. He has been married to Shira Piven since 1999. They have two children."
+        }
+    </td>
+   </tr>
+   <tr>
+   <td>/users/:id</td>
+    <td>PUT</td>
+    <td>Update User Info</td>
+    <td>None</td>
+    <td>None</td>
+    <td>
+        {
+            "id": 1,
+            "name": "Updated User Name",
+            "favoriteMovies": [
+            "DeadPool"
+            ]
+        }
+    </td>
+   </tr>
+   <tr>
+   <td>/users/2/Logan</td>
+    <td>POST</td>
+    <td>Update Users Favorite Movie</td>
+    <td>None</td>
+    <td>None</td>
+    <td>
+      Message saying Logan has been added to user 2's array
+    </td>
+   </tr>
+
+   <tr>
+   <td>/users/2/:id/movieTitle</td>
+    <td>DELETE</td>
+    <td>Delete Users Favorite Movie</td>
+    <td>None</td>
+    <td>None</td>
+    <td>
+       Message saying Logan has been deleted from user 2's array
+    </td>
+   </tr>
+
+   <tr>
+   <td>/users/:id</td>
+    <td>DELETE</td>
+    <td>Delete User</td>
+    <td>None</td>
+    <td>None</td>
+    <td>
+       Message saying User has been deleted 
+    </td>
+   </tr>
+   
+   </table>
+</center>
+
 </body>
 </html>
