@@ -1,0 +1,22 @@
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('The Guardian','A high school swim champion with a troubled past enrolls in the U.S. Coast Guard''s ''A'' School, where legendary rescue swimmer Ben Randall teaches him some hard lessons about loss, love, and self-sacrifice.',1,1,'https://www.imdb.com/title/tt0406816/mediaviewer/rm58757632/?ref_=tt_ov_i',False);
+																					 
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('The GodFather','The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.',2,2,'https://www.imdb.com/title/tt0068646/mediaviewer/rm746868224/?ref_=tt_ov_i',False);
+																					 
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('Crazy, Stupid, Love.','A middle-aged husband'' life changes dramatically when his wife asks him for a divorce. He seeks to rediscover his manhood with the help of a newfound friend, Jacob, learning to pick up girls at bars.',3,3,'https://www.imdb.com/title/tt1570728/mediaviewer/rm3494755840/?ref_=tt_ov_i',False);
+																					 
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('Deadpool','A wisecracking mercenary gets experimented on and becomes immortal but ugly, and sets out to track down the man who ruined his looks.',4,4,'https://www.imdb.com/title/tt1431045/mediaviewer/rm351021568/?ref_=tt_ov_i',False);
+																					 
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('Thor: Ragnarok','Imprisoned on the planet Sakaar, Thor must race against time to return to Asgard and stop Ragnarök, the destruction of his world, at the hands of the powerful and ruthless villain Hela..',5,5,'https://www.imdb.com/title/tt3501632/mediaviewer/rm1413491712/?ref_=tt_ov_i',False);
+																					 
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('Spider-Man: Into the Spider-Verse','een Miles Morales becomes the Spider-Man of his universe, and must join with five spider-powered individuals from other dimensions to stop a threat for all realities.',6,6,'https://www.imdb.com/title/tt4633694/mediaviewer/rm173371392/?ref_=tt_ov_i',False);
+																					 
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('White Chicks','Two disgraced FBI agents go way undercover in an effort to protect hotel heiresses the Wilson sisters from a kidnapping plot.',7,7,'https://www.imdb.com/title/tt0381707/mediaviewer/rm2950732032/?ref_=tt_ov_i',True);
+																					 
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('The Other Guys','Two mismatched New York City detectives seize an opportunity to step up like the city''s top cops, whom they idolize, only things don''t quite go as planned.',8,8,'https://www.imdb.com/title/tt1386588/mediaviewer/rm2586368513/?ref_=tt_ov_i',False);
+																					 
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('Logan','In a future where mutants are nearly extinct, an elderly and weary Logan leads a quiet life. But when Laura, a mutant child pursued by scientists, comes to him for help, he must get her to safety.',9,9,'https://www.imdb.com/title/tt3315342/mediaviewer/rm2555988736/?ref_=tt_ov_i',False);
+																					 
+INSERT INTO Movies(Title, Description, GenreID, DirectorID,ImageUrl,Featured) VALUES('The Dark Knight','When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.',10,10,'https://www.imdb.com/title/tt0468569/mediaviewer/rm4023877632/?ref_=tt_ov_i',True);
+
+INSERT INTO Movies(Title, Description, GenreID, DirectorID, ImageURL, Featured) VALUES('Inception', 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.', 4,11, 'https://www.imdb.com/title/tt1375666/mediaviewer/rm3426651392/?ref_=tt_ov_i',TRUE); )
+

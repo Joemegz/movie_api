@@ -1,3 +1,11 @@
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
 const express = require('express'); //imports express into package 
 const app = express();//imports express into package
    
@@ -19,18 +27,18 @@ app.use((err, req, res, next) => {
 
   let movies = [
     {
-      "Title":"The Guardian",
-      "Description": "A high school swim champion with a troubled past enrolls in the U.S. Coast Guard's 'A' School, where legendary rescue swimmer Ben Randall teaches him some hard lessons about loss, love, and self-sacrifice.",
+      "Title":"Inception",
+      "Description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
       "Genre": {
         "Name": "Action",
         "Description": "Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats."
        },
-      "Director": { 
-        "Name": "Andrew Davis",
-        "Bio": "Andrew Davis is a filmmaker with a reputation for directing intelligent thrillers, most notably the Academy Award-nominated box-office hit The Fugitive (1993), starring Harrison Ford and Tommy Lee Jones. The film received seven Academy Award nominations including Best Picture and earned Jones a Best Supporting Actor award. Davis garnered a Golden Globe nomination for Best Director and a Directors Guild of America nomination for Outstanding Directorial Achievement in Theatrical Direction."
+       "Director": {
+        "Name": "Christopher Nolan",
+        "Bio": "Best known for his cerebral, often nonlinear, storytelling, acclaimed writer-director Christopher Nolan was born on July 30, 1970, in London, England. Over the course of 15 years of filmmaking, Nolan has gone from low-budget independent films to working on some of the biggest blockbusters ever made."
       },
-      "ImageURL": "https://www.imdb.com/title/tt0406816/mediaviewer/rm58757632/?ref_=tt_ov_i",
-      "Year": "2006"
+      "ImageURL": "https://www.imdb.com/title/tt1375666/mediaviewer/rm3426651392/?ref_=tt_ov_i",
+      "Year": "2010"
     },
     {
       "Title": "The GodFather",
@@ -185,34 +193,54 @@ app.get("/", (req, res)=> {
 
 //add endpoints in this area 
 
+app.get('/users', (req, res) => {
+  Users.find()
+    .then((users) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
+
 // CREATE
-app.post('/users', (req, res) =>{
-  const newUser = req.body;
-
-  if (newUser.name) {
-    // newUser.id = uuid.v4;
-    users.push(newUser);
-    res.status(201).json(newUser)
-  } else {
-    res.status(400).send('users need names')
-  }
-})
-
+app.post('/users', (req, res) => {
+  Users.findOne({ Username: req.body.Username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.Username + 'already exists');
+      } else {
+        Users
+          .create({
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
+          .then((user) =>{res.status(201).json(user) })
+        .catch((error) => {
+          console.error(error);
+          res.status(500).send('Error: ' + error);
+        })
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
+});
 //UPDATE
-app.put('/users/:id', (req, res) =>{
-  const { id } = req.params;
-  const updatedUser = req.body;
-
-    let user = users.find( user => user.id == id);
-
-  if (user) {
-    user.name = updatedUser.name;
-    res.status(200).json(user);
-  } else {
-    res.status(400).send('no such user')
-  }
-})
-
+app.get('/users/:Username', (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
 
 // CREATE
 app.post('/users/:id/:movieTitle', (req, res) =>{
@@ -228,6 +256,25 @@ app.post('/users/:id/:movieTitle', (req, res) =>{
   }
 })
 
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, { $set:
+    {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true }, // This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
+});
 
 // DELETE
 app.delete('/users/:id/:movieTitle', (req, res) =>{
@@ -244,18 +291,20 @@ app.delete('/users/:id/:movieTitle', (req, res) =>{
 })
 
 // DELETE
-app.delete('/users/:id', (req, res) =>{
-  const { id } = req.params;
-  
-  let user = users.find( user => user.id == id);
-
-  if (user) {
-    users = users.filter( user => user.id != id);
-    res.status(200).send(`user ${id} has been deleted`);
-  } else {
-    res.status(400).send('no such user')
-  }
-})
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+    .then((user) => {
+      if (!user) {
+        res.status(400).send(req.params.Username + ' was not found');
+      } else {
+        res.status(200).send(req.params.Username + ' was deleted.');
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
+});
 
 
 // READ
