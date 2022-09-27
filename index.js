@@ -6,18 +6,24 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, 
 const Movies = Models.Movie;
 const Users = Models.User;
 
+
+
 const express = require('express'); //imports express into package 
 const app = express();//imports express into package
-   
+
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const { allowedNodeEnvironmentFlags, title } = require('process');
 
+
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 app.use(express.json())
 app.use(morgan('combined', {stream: accessLogStream}));
-
 
 
 app.use((err, req, res, next) => {
@@ -308,9 +314,20 @@ app.delete('/users/:Username', (req, res) => {
 
 
 // READ
-app.get('/movies', (req, res) => {
-  res.status(200).json(movies);
-})
+// app.get('/movies', (req, res) => {
+//   res.status(200).json(movies);
+// })
+
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Movies.find()
+    .then((movies) => {
+      res.status(201).json(movies);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
+});
 
 //READ
 app.get('/movies/:title', (req, res) => {

@@ -26,7 +26,7 @@ http.createServer((request, response) => {
         }
 
         response.writeHead(200, {'Content-Type': 'text/plain'});
-        response.end('Hellow Node!\n');
+        response.end('Hello Node!\n');
         })
 
 }).listen(8080);
