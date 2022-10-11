@@ -11,15 +11,15 @@ const Users = Models.User;
 const express = require('express'); //imports express into package 
 const app = express();//imports express into package
 
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
 
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const { allowedNodeEnvironmentFlags, title } = require('process');
 
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 app.use(express.json())

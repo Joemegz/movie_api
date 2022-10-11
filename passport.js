@@ -7,7 +7,7 @@ let Users = Models.User,
   JWTStrategy = passportJWT.Strategy,
   ExtractJWT = passportJWT.ExtractJwt;
 
-passport.use(new LocalStrategy({ //takes a username and password form the request body and uses Mongoose to check the database for a user with that username
+passport.use(new LocalStrategy({
   usernameField: 'Username',
   passwordField: 'Password'
 }, (username, password, callback) => {
@@ -20,7 +20,7 @@ passport.use(new LocalStrategy({ //takes a username and password form the reques
 
     if (!user) {
       console.log('incorrect username');
-      return callback(null, false, {message: 'Incorrect username or password.'}); //if the username can’t be found within the database, an error message is passed to the callback
+      return callback(null, false, {message: 'Incorrect username or password.'});
     }
 
     console.log('finished');
@@ -29,8 +29,8 @@ passport.use(new LocalStrategy({ //takes a username and password form the reques
 }));
 
 passport.use(new JWTStrategy({
-  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),//allows you to authenticate users based on the JWT submitted alongside their request
-  secretOrKey: 'your_jwt_secret' //"secret key" used to verify the signature of the JWT to make sure the sender is who it says it is
+  jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+  secretOrKey: 'your_jwt_secret'
 }, (jwtPayload, callback) => {
   return Users.findById(jwtPayload._id)
     .then((user) => {
