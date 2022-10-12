@@ -1,7 +1,7 @@
-const jwtSecret = 'your_jwt_secret'; // This has to be the same key used in the JWTStrategy , const is similar to a variable but cant be changed thru reassignment
+const jwtSecret = 'your_jwt_secret'; // This has to be the same key used in the JWTStrategy
 
-const jwt = require('jsonwebtoken'), //includes modules that exist in separate files
-  passport = require('passport'); //includes modules that exist in separate files
+const jwt = require('jsonwebtoken'),
+  passport = require('passport');
 
 require('./passport'); // Your local passport file
 
