@@ -7,24 +7,39 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 
-
 const express = require('express'); //imports express into package 
 const app = express();//imports express into package
 
+const { check, validationResult } = require('express-validator');
+
+const cors = require('cors');
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const { allowedNodeEnvironmentFlags, title } = require('process');
 
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
 
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 app.use(express.json())
 app.use(morgan('combined', {stream: accessLogStream}));
 
+
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
@@ -212,23 +227,25 @@ app.get('/users', (req, res) => {
 
 // CREATE
 app.post('/users', (req, res) => {
-  Users.findOne({ Username: req.body.Username })
+  let hashedPassword = Users.hashPassword(req.body.Password);
+  Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
     .then((user) => {
       if (user) {
-        return res.status(400).send(req.body.Username + 'already exists');
+      //If the user is found, send a response that it already exists
+        return res.status(400).send(req.body.Username + ' already exists');
       } else {
         Users
           .create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
-          .then((user) =>{res.status(201).json(user) })
-        .catch((error) => {
-          console.error(error);
-          res.status(500).send('Error: ' + error);
-        })
+          .then((user) => { res.status(201).json(user) })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send('Error: ' + error);
+          });
       }
     })
     .catch((error) => {
@@ -368,6 +385,7 @@ app.get('/movies/directors/:directorName', (req, res) => {
 })
 
  app.use(express.static('public'));//appends public folder where static file is 
- app.listen(8080, () => {
-    console.log("Server is running")
- })
+ const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+ console.log('Listening on Port ' + port);
+});
