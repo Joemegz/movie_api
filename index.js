@@ -23,7 +23,6 @@ require("./passport");
 
 const { check, validationResult } = require("express-validator");
 
-const cors = require("cors");
 let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
 
 app.use(
