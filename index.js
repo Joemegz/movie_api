@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const Models = require("./models.js");
 
-mongoose.connect(
-  "mongodb+srv://dbAnu:passw0rd@cluster0.w1fyk.mongodb.net/moviedb",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
+//mongoose.connect(
+  //"mongodb+srv://dbAnu:passw0rd@cluster0.w1fyk.mongodb.net/moviedb",
+ // { useNewUrlParser: true, useUnifiedTopology: true }
+//);
+
+mongoose.connect('process.env.CONNECTION_URI', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const Movies = Models.Movie;
 const Users = Models.User;
