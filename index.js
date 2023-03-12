@@ -158,14 +158,14 @@ app.get(
   "/movies/genre/:genreName",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { genreName } = req.params;
-    const genre = movies.find((movie) => movie.Genre.Name === genreName).Genre;
-
-    if (genre) {
-      res.status(200).json(genre);
-    } else {
-      res.status(400).send("no such genre");
-    }
+    Movies.findOne({ Genre:req.params.genreName })
+    .then((movies) => { 
+      res.json(movies);
+    })
+    .catch((err) => { /* error handling */
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    });
   }
 );
 
@@ -174,7 +174,7 @@ app.get(
   "/genres/:Genre",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.find({ "Genre.Name": req.params.Genre })
+    Movies.findOne({ Genre: req.params.Genre })
       .then((movie) => {
         res.send(movie.Genre.Description);
       })
@@ -189,17 +189,15 @@ app.get(
   "/movies/directors/:directorName",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { directorName } = req.params;
-    const director = movies.find(
-      (movie) => movie.Director.Name === directorName
-    ).Director;
-
-    if (director) {
-      res.status(200).json(director);
-    } else {
-      res.status(400).send("no such director");
-    }
-  }
+    Movies.findOne({ Director: req.params.directorName })
+    .then((movie) => {
+      res.send(movie.Director);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(400).send("Error: " + "No such Director!");
+    });
+}
 );
 
 //UPDATE
@@ -208,9 +206,8 @@ app.post(
   "/users/:id/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { id, movieTitle } = req.params;
-
-    let user = users.find((user) => user.id == id);
+    Movies.findOne({ Title: req.params.movieTitle })
+    let user = Users.find((user) => user.id == id);
 
     if (user) {
       user.favoriteMovies.push(movieTitle);
@@ -276,21 +273,22 @@ app.delete(
   "/users/:id/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { id, movieTitle } = req.params;
-
-    let user = users.find((user) => user.id == id);
-
-    if (user) {
-      user.favoriteMovies = user.favoriteMovies.filter(
-        (title) => title !== movieTitle
-      );
-      res
-        .status(200)
-        .send(`${movieTitle} has been removed from user ${id}'s array`);
-    } else {
-      res.status(400).send("no such user");
-    }
-  }
+  Users.findOneAndUpdate(
+    { Username: req.params.Username }, 
+    {$pull: {Favorites: req.params.favoriteMovies} },
+    {new: true })
+    .then((user) => {
+      if (!user) {
+        res.status(400).send(req.params.favoriteMovies + " was not found");
+      } else {
+        res.status(200).send(req.params.favoriteMovies + " was deleted.");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+}
 );
 
 //error handler
