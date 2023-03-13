@@ -175,26 +175,14 @@ app.get(
   }
 );
 
-//Get movies by title
-app.get('/movies/:Title', passport.authenticate('jwt', { session: false}), (req, res) => {
-  Movies.findOne({ Title: req.params.Title })
-    .then((movies) => { 
-      res.json(movies);
-    })
-    .catch((err) => { /* error handling */
-      console.error(err);
-      res.status(500).send('Error: ' + err);
-    });
-});
-
-//Get movies by genre information
+// Get a movie by title
 app.get(
-  "/movies/genre/:genreName",
+  "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ "Genre.Name": req.params.genreName })
+    Movies.findOne({ Title: req.params.Title })
       .then((movie) => {
-        res.json(movie.Genre);
+        res.json(movie);
       })
       .catch((err) => {
         console.error(err);
@@ -203,6 +191,23 @@ app.get(
   }
 );
 
+//Get movies by genre information
+app.get(
+  '/movies/genres/:genreName',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const genreName = req.params.genreName;
+    Movies.find({ 'genre.name': genreName })
+      .then((movies) => {
+        if (isEmpty(movies)) {
+          response.noMoviesWithGenre(res, genreName);
+        } else {
+          response.success(res, movies);
+        }
+      })
+      .catch((err) => response.serverError(res, err));
+  }
+);
 //Get genre description
 app.get(
   "/genres/:Genre",
