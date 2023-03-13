@@ -125,6 +125,41 @@ app.get(
   }
 );
 
+//add a movie
+app.post(
+  "/movies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+      Movies.findOne({ Username: req.body.Title }).then((movie) => {
+          if (movie) {
+              return res.status(400).send(req.body.Title + 'aleady exists');
+          } else {
+              Movies.create({
+                  Title: req.body.Title,
+                  Description: req.body.Description,
+                  Genre: {
+                      Name: req.body.Name,
+                      Description: req.body.Description,
+                  },
+                  Director: {
+                      Name: req.body.Name,
+                      Bio: req.body.Bio,
+                  },
+                  ImageURL: req.body.ImageURL,
+                  Featured: req.body.Boolean,
+              })
+                  .then((movie) => {
+                      res.status(201).json(movie);
+                  })
+                  .catch((err) => {
+                      console.log(err);
+                      res.status(500).send('Error: ' + err);
+                  });
+          }
+      });
+  }
+);
+
 //Get all movies
 app.get(
   "/movies",
