@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 const Models = require("./models.js");
+const bodyParser = require('body-parser');
 
 //mongoose.connect(
-  //"mongodb+srv://dbAnu:passw0rd@cluster0.w1fyk.mongodb.net/moviedb", doodlebob
- // { useNewUrlParser: true, useUnifiedTopology: true }
-//);
+  mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -15,6 +14,9 @@ const express = require("express"); //imports express into package
 const app = express(); //imports express into package
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require('cors');
 app.use(cors());
