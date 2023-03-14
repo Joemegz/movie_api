@@ -213,7 +213,7 @@ app.get(
 
 //Get genre description
 app.get(
-  "/genres/:Genre",
+  "/genre/:Description",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ Description: req.params.Description })
