@@ -126,7 +126,7 @@ app.get(
   }
 );
 
-//add a movie
+//add a movie updated
 app.post(
   "/movies",
   passport.authenticate("jwt", { session: false }),
