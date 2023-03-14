@@ -216,7 +216,7 @@ app.get(
   "/genre/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Description: req.params.Description })
+    Movies.findOne({ Name: req.params.Description })
       .then((movie) => {
         res.send(movie.Genre.Description);
       })
