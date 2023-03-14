@@ -193,23 +193,6 @@ app.get(
   }
 );
 
-//Get movies by genre information
-// app.get(
-//   '/movies/genres/:genreName',
-//   passport.authenticate('jwt', { session: false }),
-//   (req, res) => {
-//     Movies.find({ Genre: {Name: req.params.Name} })
-//       .then((movies) => {
-//         if (isEmpty(movies)) {
-//           response.noMoviesWithGenre(res, genreName);
-//         } else {
-//           response.success(res, movies);
-//         }
-//       })
-//       .catch((err) => response.serverError(res, err));
-//   }
-// );
-
 // Get a Movie by Genre
 app.get(
   "/movies/genre/:Name",
@@ -233,7 +216,7 @@ app.get(
   "/genres/:Genre",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Genre: req.params.Genre })
+    Movies.findOne({ Description: req.params.Description })
       .then((movie) => {
         res.send(movie.Genre.Description);
       })
