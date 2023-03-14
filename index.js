@@ -236,7 +236,7 @@ app.get(
       res.send(movie.Director.Name, movie.Director.Bio);
     })
     .catch((err) => {
-      console.error(err);
+      console.error(req.params.Name);
       res.status(400).send("Error: " + "No such Director!");
     });
 }
