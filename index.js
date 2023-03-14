@@ -247,7 +247,7 @@ app.get(
 //UPDATE
 //Update movie in user's list
 app.post(
-  "/users/:id/:movieTitle",
+  "/users/:Username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ Title: req.params.movieTitle })
