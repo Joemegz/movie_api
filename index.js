@@ -228,16 +228,16 @@ app.get(
 );
 //Get director information
 app.get(
-  "/movies/director/:Name",
+  "/director/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ Name: req.params.Name })
     .then((movie) => {
-      res.send(movie.Director.Name, movie.Director.Bio);
+      res.send(movie.Director.Bio);
     })
     .catch((err) => {
-      console.error(req.params.Name);
-      res.status(400).send("Error: " + "No such Director!" + req.params.Name);
+      console.error(err);
+      res.status(400).send("Error: " + "No such Director!");
     });
 }
 );
