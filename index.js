@@ -131,7 +131,7 @@ app.post(
   "/movies",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-      Movies.findOne({ Username: req.body.Title }).then((movie) => {
+      Movies.findOne({ Title: req.body.Title }).then((movie) => {
           if (movie) {
               return res.status(400).send(req.body.Title + 'aleady exists');
           } else {
@@ -161,7 +161,7 @@ app.post(
   }
 );
 
-//Get all movies
+//Get all movies updated
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -177,7 +177,7 @@ app.get(
   }
 );
 
-// Get a movie by title
+// Get a movie by title updated
 app.get(
   "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
@@ -193,7 +193,7 @@ app.get(
   }
 );
 
-// Get a Movie by Genre
+// Get a Movie by Genre updated
 app.get(
   "/movies/genre/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -211,7 +211,7 @@ app.get(
 );
 
 
-//Get genre description
+//Get genre description updated
 app.get(
   "/genre/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -226,7 +226,9 @@ app.get(
       });
   }
 );
-//Get director information
+
+
+//Get director information updated
 app.get(
   "/director/:Name",
   passport.authenticate("jwt", { session: false }),
