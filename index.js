@@ -228,12 +228,12 @@ app.get(
 );
 //Get director information
 app.get(
-  "/movies/directors/:director/Name",
+  "/movies/director/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ "Director.Name": req.params.directorName })
+    Movies.findOne({ Name: req.params.Name })
     .then((movie) => {
-      res.send(movie.Director);
+      res.send(movie.Director.Name, movie.Director.Bio);
     })
     .catch((err) => {
       console.error(err);
