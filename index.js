@@ -237,7 +237,7 @@ app.get(
     })
     .catch((err) => {
       console.error(req.params.Name);
-      res.status(400).send("Error: " + "No such Director!");
+      res.status(400).send("Error: " + "No such Director!" + req.params.Name);
     });
 }
 );
