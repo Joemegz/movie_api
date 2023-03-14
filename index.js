@@ -9,6 +9,8 @@ mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnified
 
 const Movies = Models.Movie;
 const Users = Models.User;
+const Genres = Models.Genre;
+const Directors = Models.Director;
 
 const express = require("express"); //imports express into package
 const app = express(); //imports express into package
@@ -196,8 +198,7 @@ app.get(
   '/movies/genres/:genreName',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    const genreName = req.params.genreName;
-    Movies.find({ 'genre.name': genreName })
+    Movies.find({ Genre: req.params.genreName })
       .then((movies) => {
         if (isEmpty(movies)) {
           response.noMoviesWithGenre(res, genreName);
