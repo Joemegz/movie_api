@@ -216,9 +216,9 @@ app.get(
   "/genre/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Name: req.params.Name })
+    Movies.findOne({ Name: req.params.Name })//finding the genre name
       .then((movie) => {
-        res.send(movie.Genre.Description);
+        res.send(movie.Genre.Description);//sending genre description
       })
       .catch((err) => {
         console.error(err);
