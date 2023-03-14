@@ -212,12 +212,13 @@ app.get(
 
 // Get a Movie by Genre
 app.get(
-  "/movies/genre/:genreName",
+  "/movies/genre/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ "Genre.Name": req.params.genreName })
+    Movies.findOne({ Name: req.params.Name })
       .then((movie) => {
         res.json(movie.Genre);
+        console.log("inside then")
       })
       .catch((err) => {
         console.error(err);
@@ -244,7 +245,7 @@ app.get(
 );
 //Get director information
 app.get(
-  "/movies/directors/:directorName",
+  "/movies/directors/:director/Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ "Director.Name": req.params.directorName })
