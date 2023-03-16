@@ -245,7 +245,7 @@ app.get(
 );
 
 //UPDATE
-//Update movie in user's list
+//Update movie in user's list NOT WORKING
 app.post(
   "/users/username/:FavoriteMovies",
   passport.authenticate("jwt", { session: false }),
@@ -313,7 +313,7 @@ app.delete(
   }
 );
 
-// Delete favorite movie
+// Delete favorite movie NOT WORKING
 app.delete(
   "/users/:id/:movieTitle",
   passport.authenticate("jwt", { session: false }),
