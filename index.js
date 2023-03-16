@@ -254,10 +254,10 @@ app.post(
     let user = Users.find((user) => user.id == id);
 
     if (user) {
-      user.favoriteMovies.push(movie.Title);
+      user.favoriteMovies.push(user.favoriteMovies);
       res
         .status(200)
-        .send(`${movieTitle} has been added to user ${id}'s array`);
+        .send(`${movie.Title} has been added to user ${id}'s array`);
     } else {
       res.status(400).send("no such user");
     }
