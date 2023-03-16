@@ -250,7 +250,7 @@ app.post(
   "/users/username/:Title",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Title: req.params.Title })
+    Movies.findOneAndUpdate({ Title: req.params.Title })
     let user = Users.find((user) => user.id == id);
 
     if (user) {
