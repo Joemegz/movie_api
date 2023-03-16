@@ -245,40 +245,25 @@ app.get(
 );
 
 //UPDATE
-// //Update movie in user's list
-// app.post(
-//   "/users/username/:FavoriteMovies",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     Movies.findOneAndUpdate({ Title: req.params.Title })
-//     let user = Users.find((user) => user.id == id);
+//Update movie in user's list
+app.post(
+  "/users/username/:FavoriteMovies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Movies.find({ Title: req.params.Title })
+    let user = Users.find((user) => user.id == id);
 
-//     if (user) {
-//       user.favoriteMovies.push(user.favoriteMovies);
-//       res
-//         .status(200)
-//         .send(`${movie.Title} has been added to user ${id}'s array`);
-//     } else {
-//       res.status(400).send("no such user");
-//     }
-//   }
-// );
-
-// Add a movie to a user's list of favorites
-app.post('/users/:username/movies/:MovieID', (req, res) => {
-  Users.findOneAndUpdate({ Username: req.params.Username }, {
-     $push: { FavoriteMovies: req.params.MovieID }
-   },
-   { new: true }, // This line makes sure that the updated document is returned
-  (err, updatedUser) => {
-    if (err) {
-      console.error(err);
-      res.status(500).send('Error: ' + err);
+    if (user) {
+      user.favoriteMovies.push(user.favoriteMovies);
+      res
+        .status(200)
+        .send(`${movie.Title} has been added to user ${id}'s array`);
     } else {
-      res.json(updatedUser);
+      res.status(400).send("no such user");
     }
-  });
-});
+  }
+);
+
 
 // Update username TESTED
 app.put(
