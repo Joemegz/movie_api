@@ -250,11 +250,11 @@ app.post(
   "/users/username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Title: req.params.movieTitle })
+    Movies.findOne({ Title: req.params.Title })
     let user = Users.find((user) => user.id == id);
 
     if (user) {
-      user.favoriteMovies.push(movieTitle);
+      user.favoriteMovies.push(movie.Title);
       res
         .status(200)
         .send(`${movieTitle} has been added to user ${id}'s array`);
