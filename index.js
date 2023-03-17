@@ -147,7 +147,7 @@ app.post(
                       Bio: req.body.Director.Bio
                   },
                   ImagePath: req.body.ImagePath,
-                  Featured: req.body.Featured
+                  Featured: req.body.Featured,
               })
                   .then((movie) => {
                       res.status(201).json(movie);
