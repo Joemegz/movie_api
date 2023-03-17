@@ -250,8 +250,8 @@ app.post(
   "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    let movie = Movies.findOne({ Title: req.params.movieTitle });
-    Users.findOneAndUpdate({ Username: req.params.username }, {
+    Movies.findOne({ Title: req.params.movieTitle }) .then((movie) =>{
+      Users.findOneAndUpdate({ Username: req.params.username }, {
       $push: { FavoriteMovies: movie }
     },
     { new: true }, // This line makes sure that the updated document is returned
@@ -263,6 +263,10 @@ app.post(
        res.status(200).send('Movie added to FavoriteMovies');
      }
    });
+
+
+    })
+    
   }
 );
 
