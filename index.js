@@ -251,7 +251,7 @@ app.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
    let movie = Movies.findOne({ Title: req.params.movieTitle })
-    let user = Users.find((user) => user.Username == username);
+    let user = Users.findOne({ Username: req.params.username });
 
     if (user) {
       user.FavoriteMovies.push(movieTitle);
