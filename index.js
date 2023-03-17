@@ -247,14 +247,14 @@ app.get(
 //UPDATE
 //Update movie in user's list
 app.post(
-  "/users/:Username/:movieTitle",
+  "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Title: req.params.movieTitle })
-    let user = Users.find((user) => user.id == id);
+   let movie = Movies.findOne({ Title: req.params.movieTitle })
+    let user = Users.find((user) => user.Username == username);
 
     if (user) {
-      user.favoriteMovies.push(movieTitle);
+      user.FavoriteMovies.push(movieTitle);
       res
         .status(200)
         .send(`${movieTitle} has been added to user ${id}'s array`);
