@@ -245,7 +245,7 @@ app.get(
 );
 
 //UPDATE
-//Update movie in user's list NOT WORKING
+//Update movie in user's list TESTED
 app.post(
   "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
@@ -324,23 +324,24 @@ app.delete(
   "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-  let movie = Movies.findOne({ Title: req.params.movieTitle });
-  Users.findOneAndUpdate(
-    { Username: req.params.username }, 
-    {$pull: {FavoriteMovies: movie} },
-    {new: true })
-    .then((user) => {
-      if (!user) {
-        res.status(400).send(req.params.favoriteMovies + " was not found");
-      } else {
-        res.status(200).send(req.params.favoriteMovies + " was deleted.");
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-}
+  Movies.findOne({ Title: req.params.movieTitle }) .then((movie) => {
+    Users.findOneAndUpdate(
+      { Username: req.params.username }, 
+      {$pull: {FavoriteMovies: movie} },
+      {new: true })
+      .then((user) => {
+        if (!user) {
+          res.status(400).send(req.params.username + " was not found");
+        } else {
+          res.status(200).send(req.params.movieTitle + " was deleted.");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  })
+ }
 );
 
 //error handler
