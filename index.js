@@ -64,7 +64,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.get("/", (req, res) => {
   res.send("Welcome to MovieApi");
 });
-// CREATE user
+// CREATE user TESTED
 app.post("/users", (req, res) => {
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
@@ -94,7 +94,7 @@ app.post("/users", (req, res) => {
     });
 });
 //READ
-// Get all users
+// Get all users TESTED
 app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
@@ -110,7 +110,7 @@ app.get(
   }
 );
 
-//Get a user by username
+//Get a user by username TESTED
 app.get(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -126,7 +126,7 @@ app.get(
   }
 );
 
-//add a movie updated
+//add a movie TESTED
 app.post(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -161,7 +161,7 @@ app.post(
   }
 );
 
-//Get all movies updated
+//Get all movies TESTED
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -177,7 +177,7 @@ app.get(
   }
 );
 
-// Get a movie by title updated
+// Get a movie by title TESTED
 app.get(
   "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
@@ -193,7 +193,7 @@ app.get(
   }
 );
 
-// Get a Movie by Genre updated
+// Get a Movie by Genre TESTED
 app.get(
   "/movies/genre/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -211,7 +211,7 @@ app.get(
 );
 
 
-//Get genre description updated
+//Get genre description TESTED
 app.get(
   "/genre/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -228,7 +228,7 @@ app.get(
 );
 
 
-//Get director information updated
+//Get director information TESTED
 app.get(
   "/director/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -245,7 +245,7 @@ app.get(
 );
 
 //UPDATE
-//Update movie in user's list
+//Update movie in user's list NOT WORKING
 app.post(
   "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
@@ -257,14 +257,15 @@ app.post(
       user.FavoriteMovies.push(movieTitle);
       res
         .status(200)
-        .send(`${movieTitle} has been added to user ${id}'s array`);
+        .send(`${movie.Title} has been added to user ${id}'s array`);
     } else {
       res.status(400).send("no such user");
     }
   }
 );
 
-// Update username
+
+// Update username TESTED
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -292,7 +293,7 @@ app.put(
   }
 );
 
-// Delete user
+// Delete user TESTED
 app.delete(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -312,7 +313,7 @@ app.delete(
   }
 );
 
-// Delete favorite movie
+// Delete favorite movie NOT WORKING
 app.delete(
   "/users/:id/:movieTitle",
   passport.authenticate("jwt", { session: false }),
