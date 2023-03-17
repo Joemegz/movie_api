@@ -36,6 +36,7 @@
     <td>/users</td>
     <td>POST</td>
     <td>Create user registration</td>
+    <td>Users</td>
     <td>None</td>
     <td>
         {
@@ -53,6 +54,7 @@
     <td>/users</td>
     <td>GET</td>
     <td>Find existing users</td>
+    <td>Users</td>
     <td>None</td>
     <td>
         {
@@ -80,6 +82,7 @@
     <td>/users/:Username</td>
     <td>GET</td>
     <td>Find existing user by username</td>
+    <td>Username</td>
     <td>None</td>
     <td>
         {
@@ -107,9 +110,9 @@
     <td>/movies</td>
     <td>POST</td>
     <td>Add movie to list of movies</td>
-    <td>None</td>
+    <td>Movie</td>
     <td>
-       None
+        /movies
     </td>
     <td>
         {
@@ -140,7 +143,7 @@
     <td>/movies</td>
     <td>GET</td>
     <td>fetch list of movies</td>
-    <td>None</td>
+    <td>Movie</td>
     <td>
        None
     </td>
@@ -168,7 +171,7 @@
        <td>/movies/:Title</td>
        <td>GET</td>
        <td>Fetch movie by name</td>
-       <td>Movie by Title</td>
+       <td>movieTitle</td>
        <td>None</td>
        <td>
            {
@@ -188,7 +191,7 @@
     <td>/movies/genre/:Name</td>
     <td>GET</td>
     <td>Fetch movie by genre</td>
-    <td>List of movie names by Genre</td>
+    <td>movieTitle</td>
     <td>None</td>
     <td>
         "Silence of the Lambs"
@@ -229,7 +232,7 @@
            <td>/users/username/Logan</td>
            <td>POST</td>
            <td>Update Users Favorite Movie</td>
-           <td>None</td>
+           <td>movieTitle</td>
            <td>None</td>
            <td>
                'Movie added to FavoriteMovies'
@@ -239,7 +242,7 @@
         <td>/users/:Username</td>
          <td>PUT</td>
          <td>Update User Info</td>
-         <td>id</td>
+         <td>Username</td>
          <td>None</td>
          <td>
              {
@@ -267,7 +270,7 @@
     <td>/users/username/:movieTitle</td>
      <td>DELETE</td>
      <td>Delete Users Favorite Movie</td>
-     <td>id, movieTitle</td>
+     <td>movieTitle</td>
      <td>None</td>
      <td>
         Message saying " (movie title) was deleted."
