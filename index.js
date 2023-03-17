@@ -126,7 +126,7 @@ app.get(
   }
 );
 
-//add a movie TESTED UPDATED
+//add a movie TESTED 
 app.post(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -260,7 +260,7 @@ app.post(
        console.error(err);
        res.status(500).send('Error: ' + err);
      } else {
-       res.status(200).send('Movie added to FavoriteMovies');
+       res.status(200).send("Movie added to FavoriteMovies");
      }
    });
 
@@ -319,7 +319,7 @@ app.delete(
   }
 );
 
-// Delete favorite movie NOT WORKING
+// Delete favorite movie TESTED
 app.delete(
   "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
