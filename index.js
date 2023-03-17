@@ -126,7 +126,7 @@ app.get(
   }
 );
 
-//add a movie TESTED
+//add a movie TESTED UPDATED
 app.post(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -139,15 +139,15 @@ app.post(
                   Title: req.body.Title,
                   Description: req.body.Description,
                   Genre: {
-                      Name: req.body.Name,
-                      Description: req.body.Description,
+                      Name: req.body.Genre.Name,
+                      Description: req.body.Genre.Description
                   },
                   Director: {
-                      Name: req.body.Name,
-                      Bio: req.body.Bio,
+                      Name: req.body.Director.Name,
+                      Bio: req.body.Director.Bio
                   },
-                  ImageURL: req.body.ImageURL,
-                  Featured: req.body.Boolean,
+                  ImagePath: req.body.ImagePath,
+                  Featured: req.body.Featured
               })
                   .then((movie) => {
                       res.status(201).json(movie);
@@ -250,17 +250,18 @@ app.post(
   "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-   let movie = Movies.findOne({ Title: req.params.movieTitle })
-    let user = Users.findOne({ Username: req.params.username });
-
-    if (user) {
-      user.FavoriteMovies.push(movieTitle);
-      res
-        .status(200)
-        .send(`${movie.Title} has been added to user ${id}'s array`);
-    } else {
-      res.status(400).send("no such user");
-    }
+    Users.findOneAndUpdate({ Username: req.params.username }, {
+      $push: { FavoriteMovies: req.params.movieTitle }
+    },
+    { new: true }, // This line makes sure that the updated document is returned
+   (err, updatedUser) => {
+     if (err) {
+       console.error(err);
+       res.status(500).send('Error: ' + err);
+     } else {
+       res.json(updatedUser);
+     }
+   });
   }
 );
 
