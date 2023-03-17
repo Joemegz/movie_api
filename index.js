@@ -260,7 +260,7 @@ app.post(
        console.error(err);
        res.status(500).send('Error: ' + err);
      } else {
-       res.json(updatedUser);
+       res.status(200).send('Movie added to FavoriteMovies');
      }
    });
   }
@@ -317,12 +317,13 @@ app.delete(
 
 // Delete favorite movie NOT WORKING
 app.delete(
-  "/users/:id/:movieTitle",
+  "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+  let movie = Movies.findOne({ Title: req.params.movieTitle });
   Users.findOneAndUpdate(
-    { Username: req.params.Username }, 
-    {$pull: {Favorites: req.params.favoriteMovies} },
+    { Username: req.params.username }, 
+    {$pull: {FavoriteMovies: movie} },
     {new: true })
     .then((user) => {
       if (!user) {
