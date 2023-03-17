@@ -250,8 +250,9 @@ app.post(
   "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    let movie = Movies.findOne({ Title: req.params.movieTitle });
     Users.findOneAndUpdate({ Username: req.params.username }, {
-      $push: { FavoriteMovies: req.params.movieTitle }
+      $push: { FavoriteMovies: movie }
     },
     { new: true }, // This line makes sure that the updated document is returned
    (err, updatedUser) => {
