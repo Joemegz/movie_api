@@ -193,14 +193,14 @@ app.get(
   }
 );
 
-// Get a Movie by Genre TESTED only pulls up first movie info
+// Get a Movie by Genre TESTED !
 app.get(
   "/movies/genre/:genreName",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.find({ 'Genre.Name': req.params.genreName })
+    Movies.find({ 'Genre.Name': req.params.genreName }) //nested strings use single quote pull
       .then((movie) => {
-        res.json(movie);
+        res.json(movie); //sending all movies for the given genre
         console.log("inside then")
       })
       .catch((err) => {
@@ -213,10 +213,10 @@ app.get(
 
 //Get genre description TESTED only pulls up first movie info
 app.get(
-  "/genre/:Name",
+  "/genre/:genreName",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Name: req.params.Name })//finding the genre name
+    Movies.findOne({ 'Genre.Name': req.params.genreName })//finding the genre name
       .then((movie) => {
         res.send(movie.Genre.Description);//sending genre description
       })
@@ -230,10 +230,10 @@ app.get(
 
 //Get director information TESTED !
 app.get(
-  "/director/:directorName",
+  "/director/:directorName", 
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ 'Director.Name': req.params.directorName })
+    Movies.findOne({ 'Director.Name': req.params.directorName }) //nested strings use single quote pull
     .then((movie) => {
       res.send(movie.Director.Bio);
     })
