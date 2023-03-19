@@ -211,7 +211,7 @@ app.get(
 );
 
 
-//Get genre description TESTED only pulls up first movie info
+//Get genre description TESTED !
 app.get(
   "/genre/:genreName",
   passport.authenticate("jwt", { session: false }),
@@ -319,12 +319,12 @@ app.delete(
   }
 );
 
-// Delete favorite movie TESTED
+// Delete favorite movie TESTED !
 app.delete(
-  "/users/:username/:movieTitle",
+  "/users/:username/:movieID",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-  Movies.findOne({ Title: req.params.movieTitle }) .then((movie) => {
+  Movies.findOne({ Title: req.params.movieID }) .then((movie) => {
     Users.findOneAndUpdate(
       { Username: req.params.username }, 
       {$pull: {FavoriteMovies: movie} },

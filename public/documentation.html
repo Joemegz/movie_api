@@ -25,9 +25,6 @@
         Query Parameters
     </th>
     <th>
-        Expected Request
-    </th>
-    <th>
         Expected Response
     </th>
    </tr>
@@ -37,7 +34,6 @@
     <td>POST</td>
     <td>Create User registration</td>
     <td>Users</td>
-    <td>None</td>
     <td>
         {
             <br>
@@ -55,7 +51,6 @@
     <td>GET</td>
     <td>Find existing Users</td>
     <td>Users</td>
-    <td>None</td>
     <td>
         {
             <br>
@@ -83,7 +78,6 @@
     <td>GET</td>
     <td>Find existing User by Username</td>
     <td>Username</td>
-    <td>None</td>
     <td>
         {
             <br>
@@ -110,10 +104,7 @@
     <td>/movies</td>
     <td>POST</td>
     <td>Add Movie to list of Movies</td>
-    <td>Movie</td>
-    <td>
-        /movies
-    </td>
+    <td>Movies</td>
     <td>
         {
             <br>
@@ -143,10 +134,7 @@
     <td>/movies</td>
     <td>GET</td>
     <td>Fetch list of Movies</td>
-    <td>Movie</td>
-    <td>
-       None
-    </td>
+    <td>Movies</td>
     <td>
         {
             "Title":"Inception",
@@ -172,7 +160,6 @@
        <td>GET</td>
        <td>Fetch Movie by Name</td>
        <td>movieTitle</td>
-       <td>None</td>
        <td>
            {
                "Genre": {
@@ -188,18 +175,17 @@
 </tr>
 
 <tr>
-    <td>/movies/genre/:Name</td>
+    <td>/movies/genre/genreName</td>
     <td>GET</td>
     <td>Fetch movies by Genre</td>
     <td>movieTitle</td>
-    <td>None</td>
     <td>
         "Silence of the Lambs"
  </td>
 </tr>
 
 <tr>
- <td>/genre/:Name</td>
+ <td>/genre/:genreName</td>
  <td>GET</td>
  <td>Fetch genre by Name</td>
  <td>genreName</td>
@@ -213,11 +199,10 @@
 </tr>
 
    <tr>
-   <td>/director/:Name</td>
+   <td>/director/:directorName</td>
     <td>GET</td>
     <td>Fetch Director name</td>
     <td>directorName</td>
-    <td>None</td>
     <td>
         {
             "Name": "Adam McKay",
@@ -243,7 +228,6 @@
          <td>PUT</td>
          <td>Update User Info</td>
          <td>Username</td>
-         <td>None</td>
          <td>
              {
                  "id": 1,
@@ -260,7 +244,6 @@
        <td>DELETE</td>
        <td>Delete User or De-registering user</td>
        <td>Username</td>
-       <td>None</td>
        <td>
            Message saying: "(username) was deleted."
         </td>
@@ -271,7 +254,6 @@
      <td>DELETE</td>
      <td>Delete Users Favorite Movie using movie ID given for movieTitle</td>
      <td>movieTitle</td>
-     <td>None</td>
      <td>
         Message saying " (movie) was deleted."
      </td>
