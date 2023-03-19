@@ -179,10 +179,10 @@ app.get(
 
 // Get a movie by title TESTED!
 app.get(
-  "/movies/:Title",
+  "/movies/:movieTitle",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Title: req.params.Title })
+    Movies.findOne({ Title: req.params.movieTitle })
       .then((movie) => {
         res.json(movie);
       })
