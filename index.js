@@ -195,10 +195,10 @@ app.get(
 
 // Get a Movie by Genre TESTED only pulls up first movie info
 app.get(
-  "/movies/genre/:Name",
+  "/movies/genre/:genreName",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findone({ Name: req.params.Name })
+    Movies.findone({ 'Genre.Name': req.params.genreName })
       .then((movie) => {
         res.json(movie.Title);
         console.log("inside then")
@@ -228,7 +228,7 @@ app.get(
 );
 
 
-//Get director information TESTED only pulls up first movie info
+//Get director information TESTED !
 app.get(
   "/director/:directorName",
   passport.authenticate("jwt", { session: false }),
