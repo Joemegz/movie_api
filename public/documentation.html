@@ -136,21 +136,25 @@
     <td>Fetch list of Movies</td>
     <td>Movies</td>
     <td>
-        {
-            "Title":"Inception",
-            "Description": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
-            "Genre": {
-            "Name": "Action",
-            "Description": "Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats."
+        [
+    {
+        "Genre": {
+            "Name": "Crime",
+            "Description": "Francis Ford Coppola was born in 1939 in Detroit, Michigan, but grew up in a New York suburb in a creative, supportive Italian-American family. His father, Carmine Coppola, was a composer and musician. His mother, Italia Coppola (née Pennino), had been an actress. Francis Ford Coppola graduated with a degree in drama from Hofstra University, and did graduate work at UCLA in filmmaking. He was training as assistant with filmmaker Roger Corman, working in such capacities as sound-man, dialogue director, associate producer and, eventually, director of Dementia 13 (1963), Coppola's first feature film."
         },
-            "Director": {
-            "Name": "Christopher Nolan",
-            "Bio": "Best known for his cerebral, often nonlinear, storytelling, acclaimed writer-director Christopher Nolan was born on July 30, 1970, in London, England. Over the course of 15 years of filmmaking, Nolan has gone from low-budget independent films to working on some of the biggest blockbusters ever made."
+        "Director": {
+            "Name": "Francis Ford Coppola",
+            "Bio": "Francis Ford Coppola was born in 1939 in Detroit, Michigan, but grew up in a New York suburb in a creative, supportive Italian-American family. His father, Carmine Coppola, was a composer and musician. His mother, Italia Coppola (née Pennino), had been an actress. Francis Ford Coppola graduated with a degree in drama from Hofstra University, and did graduate work at UCLA in filmmaking. He was training as assistant with filmmaker Roger Corman, working in such capacities as sound-man, dialogue director, associate producer and, eventually, director of Dementia 13 (1963), Coppola's first feature film."
         },
-            "ImageURL": "https://www.imdb.com/title/tt1375666/mediaviewer/rm3426651392/?ref_=tt_ov_i",
-            "Year": "2010"
-        },
-        ...
+        "_id": "6414978ef3c6d8ebf51c9eed",
+        "Title": "The GodFather",
+        "Description": "The aging patriarch of an organized crime dynasty in postwar New York City transfers control of his clandestine empire to his reluctant youngest son.",
+        "Actors": [],
+        "ImagePath": "https://www.imdb.com/title/tt0068646/mediaviewer/rm746868224/?ref_=tt_ov_i",
+        "Featured": true,
+        "__v": 0
+    },.....
+        ]
     </td>
    </tr>
 
@@ -161,14 +165,21 @@
        <td>Fetch Movie by Name</td>
        <td>movieTitle</td>
        <td>
-           {
-               "Genre": {
-                "Description": "A wisecracking mercenary gets experimented on and becomes immortal but ugly, and sets out to track down the man who ruined his looks."
+        {
+            "Genre": {
+                "Name": "Comedy",
+                "Description": "Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."
             },
-            "_id": "640ff1c228e875ee39447794",
-            "Title": "Deadpool",
-            "Description": "A wisecracking mercenary gets experimented on and becomes immortal but ugly, and sets out to track down the man who ruined his looks.",
+            "Director": {
+                "Name": "Glenn Ficarra",
+                "Bio": "Glenn Ficarra is a producer and writer, known for I Love You Phillip Morris (2009), Cats & Dogs (2001) and This Is Us (2016)."
+            },
+            "_id": "64149933f3c6d8ebf51c9ef7",
+            "Title": "Crazy, Stupid, Love.",
+            "Description": "A middle-aged husband's life changes dramatically when his wife asks him for a divorce. He seeks to rediscover his manhood with the help of a newfound friend, Jacob, learning to pick up girls at bars.",
             "Actors": [],
+            "ImagePath": "https://www.imdb.com/title/tt1570728/mediaviewer/rm3494755840/?ref_=tt_ov_i",
+            "Featured": true,
             "__v": 0
         }
     </td>
@@ -180,7 +191,25 @@
     <td>Fetch Movies by Genre</td>
     <td>movieTitle</td>
     <td>
-        "Silence of the Lambs"
+    [
+        {
+            "Genre": {
+                "Name": "Comedy",
+                "Description": "Comedy is a genre of fiction that consists of discourses or works intended to be humorous or amusing by inducing laughter, especially in theatre, film, stand-up comedy, television, radio, books, or any other entertainment medium."
+            },
+            "Director": {
+                "Name": "Keenen Ivory Wayans",
+                "Bio": "The trail-blazing linchpin of a sprawling family dynasty of comic entertainers, it was multi-talented writer/director/producer Keenen Ivory Wayans (born June 8, 1958, in New York City) who led the familial pack and was the first to achieve national prominence when he successfully created, launched, wrote, hosted and starred in In Living Color (1990), a landmark 1990s black-oriented comedy sketch satire on Fox TV that beat the odds and transcended the then-narrow periphery of TV comedy to became a defiant movement of inclusion."
+            },
+            "_id": "64149a24f3c6d8ebf51c9f07",
+            "Title": "White Chicks",
+            "Description": "Two disgraced FBI agents go way undercover in an effort to protect hotel heiresses the Wilson sisters from a kidnapping plot.",
+            "Actors": [],
+            "ImagePath": "https://www.imdb.com/title/tt0381707/mediaviewer/rm2950732032/?ref_=tt_ov_i",
+            "Featured": true,
+            "__v": 0
+        }, 
+    ]
  </td>
 </tr>
 
@@ -190,10 +219,8 @@
  <td>Fetch Genre by Name</td>
  <td>genreName</td>
  <td>
-     {
-         "Name": "Action",
-         "Description": "Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence and physical feats."
-     }
+        "Action film is a film genre in which the protagonist is thrust into a series of events that typically involve violence
+        and physical feats."
  </td>
 </tr>
 
@@ -203,10 +230,10 @@
     <td>Fetch Director Name</td>
     <td>directorName</td>
     <td>
-        {
-            "Name": "Adam McKay",
-            "Bio": "Adam McKay (born April 17, 1968) is an American screenwriter, director, comedian, and actor. McKay has a comedy partnership with Will Ferrell, with whom he co-wrote the films Anchorman, Talladega Nights, and The Other Guys. Ferrell and McKay also founded their comedy website Funny or Die through their production company Gary Sanchez Productions. He has been married to Shira Piven since 1999. They have two children."
-        }
+        "Adam McKay (born April 17, 1968) is an American screenwriter, director, comedian, and actor. McKay has a comedy
+partnership with Will Ferrell, with whom he co-wrote the films Anchorman, Talladega Nights, and The Other Guys. Ferrell
+and McKay also founded their comedy website Funny or Die through their production company Gary Sanchez Productions. He
+has been married to Shira Piven since 1999. They have two children.""
     </td>
    </tr>
    <tr>
