@@ -60,11 +60,11 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
 
 app.use(morgan("combined", { stream: accessLogStream }));
 
-//CREATE
+//CREATE!
 app.get("/", (req, res) => {
   res.send("Welcome to MovieApi");
 });
-// CREATE user TESTED
+// CREATE user TESTED!
 app.post("/users", (req, res) => {
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
@@ -94,7 +94,7 @@ app.post("/users", (req, res) => {
     });
 });
 //READ
-// Get all users TESTED
+// Get all users TESTED!
 app.get(
   "/users",
   passport.authenticate("jwt", { session: false }),
@@ -110,7 +110,7 @@ app.get(
   }
 );
 
-//Get a user by username TESTED
+//Get a user by username TESTED!
 app.get(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -126,7 +126,7 @@ app.get(
   }
 );
 
-//add a movie TESTED 
+//add a movie TESTED! 
 app.post(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -161,7 +161,7 @@ app.post(
   }
 );
 
-//Get all movies TESTED
+//Get all movies TESTED!
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }),
@@ -177,7 +177,7 @@ app.get(
   }
 );
 
-// Get a movie by title TESTED
+// Get a movie by title TESTED!
 app.get(
   "/movies/:Title",
   passport.authenticate("jwt", { session: false }),
@@ -193,12 +193,12 @@ app.get(
   }
 );
 
-// Get a Movie by Genre TESTED
+// Get a Movie by Genre TESTED only pulls up first movie info
 app.get(
   "/movies/genre/:Name",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.find({ Name: req.params.Name })
+    Movies.findone({ Name: req.params.Name })
       .then((movie) => {
         res.json(movie.Title);
         console.log("inside then")
@@ -211,7 +211,7 @@ app.get(
 );
 
 
-//Get genre description TESTED
+//Get genre description TESTED only pulls up first movie info
 app.get(
   "/genre/:Name",
   passport.authenticate("jwt", { session: false }),
@@ -228,12 +228,12 @@ app.get(
 );
 
 
-//Get director information TESTED
+//Get director information TESTED only pulls up first movie info
 app.get(
-  "/director/:Name",
+  "/director/:directorName",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Name: req.params.Name })
+    Movies.findOne({ 'Director.Name': req.params.directorName })
     .then((movie) => {
       res.send(movie.Director.Bio);
     })
@@ -245,7 +245,7 @@ app.get(
 );
 
 //UPDATE
-//Update movie in user's list TESTED
+//Update movie in user's list TESTED !
 app.post(
   "/users/:username/:movieTitle",
   passport.authenticate("jwt", { session: false }),
@@ -271,7 +271,7 @@ app.post(
 );
 
 
-// Update username TESTED
+// Update username TESTED !
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
@@ -299,7 +299,7 @@ app.put(
   }
 );
 
-// Delete user TESTED
+// Delete user TESTED !
 app.delete(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
