@@ -113,7 +113,7 @@ app.get(
 //Get a user by username TESTED!
 app.get(
   "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Users.findOne({ Username: req.params.Username })
       .then((user) => {
@@ -180,7 +180,7 @@ app.get(
 // Get a movie by title TESTED!
 app.get(
   "/movies/:movieTitle",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.findOne({ Title: req.params.movieTitle })
       .then((movie) => {
