@@ -164,7 +164,7 @@ app.post(
 //Get all movies TESTED!
 app.get(
   "/movies",
-  // passport.authenticate("jwt", { session: false }), taking out for testing purposes
+  passport.authenticate("jwt", { session: false }), //taking out for testing purposes
   (req, res) => {
     Movies.find()
       .then((movies) => {
