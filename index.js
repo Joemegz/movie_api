@@ -177,7 +177,7 @@ app.get(
   "/movies/:movieID",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Title: req.params.movieID })
+    Movies.findOne({ _id: req.params.movieID })
       .then((movie) => {
         res.json(movie);
       })
