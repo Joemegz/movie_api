@@ -124,7 +124,7 @@ app.get(
 //add a movie TESTED! 
 app.post(
   "/movies",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
       Movies.findOne({ Title: req.body.Title }).then((movie) => {
           if (movie) {
@@ -159,7 +159,7 @@ app.post(
 //Get all movies TESTED!
 app.get(
   "/movies",
-  // passport.authenticate("jwt", { session: false }), taking out for testing purposes
+  passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     Movies.find()
       .then((movies) => {
@@ -174,10 +174,10 @@ app.get(
 
 // Get a movie by title TESTED!
 app.get(
-  "/movies/:movieTitle",
-  // passport.authenticate("jwt", { session: false }),
+  "/movies/:movieId",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Title: req.params.movieTitle })
+    Movies.findOne({ Title: req.params.movieId })
       .then((movie) => {
         res.json(movie);
       })
