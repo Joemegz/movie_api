@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 let movieSchema = mongoose.Schema({
-    Id: {type: string, required: false},
+    _id: {type: string, required: false},
     Title: {type: String, required: true},
     Description: {type: String, required: true},
     Genre: {
