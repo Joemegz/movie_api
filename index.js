@@ -156,7 +156,7 @@ app.post(
   }
 );
 
-//Get all movies TESTED!
+//Get all movies TESTED! 
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }), 
