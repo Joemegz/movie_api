@@ -328,7 +328,7 @@ app.delete(
         if (!user) {
           res.status(400).send(req.params.username + " was not found");
         } else {
-          res.status(200).send(req.params.movieTitle + " was deleted.");
+          res.status(200).send(req.params.movieID + " was deleted.");
         }
       })
       .catch((err) => {
