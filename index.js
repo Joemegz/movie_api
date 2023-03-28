@@ -242,10 +242,10 @@ app.get(
 //UPDATE
 //Update movie in user's list TESTED !
 app.post(
-  "/users/:username/:movieTitle",
+  "/users/:username/:movieID",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Title: req.params.movieTitle }) .then((movie) =>{
+    Movies.findOne({ _id: req.params.movieID }) .then((movie) =>{
       Users.findOneAndUpdate({ Username: req.params.username }, {
       $push: { FavoriteMovies: movie }
     },
@@ -255,7 +255,7 @@ app.post(
        console.error(err);
        res.status(500).send('Error: ' + err);
      } else {
-       res.status(200).send("Movie added to FavoriteMovies");
+       res.status(200).send(updatedUser);
      }
    });
 
