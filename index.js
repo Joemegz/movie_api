@@ -322,7 +322,7 @@ app.delete(
   Movies.findOne({ _id: req.params.movieID }) .then((movie) => {
     Users.findOneAndUpdate(
       { Username: req.params.username }, 
-      {$pull: {FavoriteMovies: movie} },
+      {$pull: {FavoriteMovies:req.params.movieID} },
       {new: true })
       .then((user) => {
         if (!user) {
