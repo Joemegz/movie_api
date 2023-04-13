@@ -160,10 +160,10 @@
 
    
    <tr>
-       <td>/movies/:movieTitle</td>
+       <td>/movies/:movieID</td>
        <td>GET</td>
-       <td>Fetch Movie by Name</td>
-       <td>movieTitle</td>
+       <td>Fetch Movie by ID</td>
+       <td>movieID</td>
        <td>
         {
             "Genre": {
@@ -240,12 +240,18 @@ has been married to Shira Piven since 1999. They have two children.""
        
        
        <tr>
-           <td>/users/username/Logan</td>
+           <td>/users/username/:movieID</td>
            <td>POST</td>
            <td>Update Users Favorite Movie</td>
-           <td>movieTitle</td>
+           <td>movieID</td>
            <td>
-               'Movie added to FavoriteMovies'
+               {
+                 "id": 1,
+                 "name": "Updated User Name",
+                 "favoriteMovies": [
+                 "DeadPool"
+                 ]
+             }
             </td>
         </tr>
         
@@ -277,10 +283,10 @@ has been married to Shira Piven since 1999. They have two children.""
     <tr>
     <td>/users/username/:movieID</td>
      <td>DELETE</td>
-     <td>Delete Users Favorite Movie using movie ID given for movieTitle</td>
-     <td>movieTitle</td>
+     <td>Delete Users Favorite Movie using movie ID</td>
+     <td>movieID</td>
      <td>
-        Message saying " (movie) was deleted."
+        Message saying "641499a9f3c6d8ebf51c9eff was deleted."
      </td>
     </tr>
    </table>

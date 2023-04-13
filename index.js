@@ -124,7 +124,7 @@ app.get(
 //add a movie TESTED! 
 app.post(
   "/movies",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
       Movies.findOne({ Title: req.body.Title }).then((movie) => {
           if (movie) {
@@ -156,10 +156,10 @@ app.post(
   }
 );
 
-//Get all movies TESTED!
+//Get all movies TESTED! 
 app.get(
   "/movies",
-  // passport.authenticate("jwt", { session: false }), taking out for testing purposes
+  passport.authenticate("jwt", { session: false }), 
   (req, res) => {
     Movies.find()
       .then((movies) => {
@@ -174,10 +174,10 @@ app.get(
 
 // Get a movie by title TESTED!
 app.get(
-  "/movies/:movieTitle",
-  // passport.authenticate("jwt", { session: false }),
+  "/movies/:movieID",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Title: req.params.movieTitle })
+    Movies.findOne({ _id: req.params.movieID })
       .then((movie) => {
         res.json(movie);
       })
@@ -242,10 +242,10 @@ app.get(
 //UPDATE
 //Update movie in user's list TESTED !
 app.post(
-  "/users/:username/:movieTitle",
+  "/users/:username/:movieID",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    Movies.findOne({ Title: req.params.movieTitle }) .then((movie) =>{
+    Movies.findOne({ _id: req.params.movieID }) .then((movie) =>{
       Users.findOneAndUpdate({ Username: req.params.username }, {
       $push: { FavoriteMovies: movie }
     },
@@ -255,7 +255,7 @@ app.post(
        console.error(err);
        res.status(500).send('Error: ' + err);
      } else {
-       res.status(200).send("Movie added to FavoriteMovies");
+       res.status(200).send(updatedUser);
      }
    });
 
@@ -319,16 +319,16 @@ app.delete(
   "/users/:username/:movieID",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-  Movies.findOne({ Title: req.params.movieID }) .then((movie) => {
+  Movies.findOne({ _id: req.params.movieID }) .then((movie) => {
     Users.findOneAndUpdate(
       { Username: req.params.username }, 
-      {$pull: {FavoriteMovies: movie} },
+      {$pull: {FavoriteMovies:req.params.movieID} },
       {new: true })
       .then((user) => {
         if (!user) {
           res.status(400).send(req.params.username + " was not found");
         } else {
-          res.status(200).send(req.params.movieTitle + " was deleted.");
+          res.status(200).send(req.params.movieID + " was deleted.");
         }
       })
       .catch((err) => {
